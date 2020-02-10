@@ -7,7 +7,7 @@ import {
   Button,
   Linking,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableHighlight
 } from "react-native";
 import moment from "moment";
 import ImageFactory from "react-native-image-picker-form";
@@ -134,13 +134,15 @@ export default class PayRoll extends Component {
           <View>
             <Text style={styles.title}>Payroll Form</Text>
             <Form ref={c => (this._form = c)} type={User} options={options} />
-            <View style={styles.butt}>
-              <Button
-                color="#0A802B"
-                title="SAVE"
-                onPress={this.handleSubmit}
-              />
-            </View>
+            <TouchableHighlight onPress={this._onPressButton}>
+              <View style={styles.butt}>
+                <Button
+                  color="#0A802B"
+                  title="SAVE"
+                  onPress={this.handleSubmit}
+                />
+              </View>
+            </TouchableHighlight>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
