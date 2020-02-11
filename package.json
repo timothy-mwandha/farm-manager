@@ -10,9 +10,12 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "expo": "~36.0.0",
+    "moment": "^2.24.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-image-crop-picker": "^0.28.0",
+    "react-native-image-picker-form": "^0.2.5",
     "react-native-web": "~0.11.7",
     "tcomb-form-native": "^0.6.20"
   },

@@ -4,8 +4,6 @@ import { View } from "react-native";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import PayRoll from "./components/PayRoll";
-import SelectionComp from "./components/SelectionComp";
-import ImageComp from "./components/ImageComp";
 import PasswordRecoveryOne from "./components/PasswordRecoveryOne";
 import PasswordRecoveryTwo from "./components/PasswordRecoveryTwo";
 
@@ -15,8 +13,8 @@ export default function App() {
       {/* <Login /> */}
       {/* <SignUp /> */}
       {/* <PayRoll /> */}
-      {/* <PasswordRecoveryOne /> */}
-      <PasswordRecoveryTwo />
+      <PasswordRecoveryOne />
+      {/* <PasswordRecoveryTwo /> */}
     </View>
   );
 }
