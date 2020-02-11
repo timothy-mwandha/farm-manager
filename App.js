@@ -13,8 +13,8 @@ export default function App() {
       {/* <Login /> */}
       {/* <SignUp /> */}
       {/* <PayRoll /> */}
-      <PasswordRecoveryOne />
-      {/* <PasswordRecoveryTwo /> */}
+      {/* <PasswordRecoveryOne /> */}
+      <PasswordRecoveryTwo />
     </View>
   );
 }

@@ -54,10 +54,6 @@ const options = {
 };
 
 export default class PasswordRecovery extends Component {
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log("value: ", value);
-  };
   render() {
     return (
       <KeyboardAvoidingView
@@ -73,34 +69,28 @@ export default class PasswordRecovery extends Component {
         <ScrollView>
           <View style={styles.container}>
             <Image
-              style={{ width: 300, margin: 30, marginRight: 30 }}
+              style={{ width: 250, margin: 30 }}
               source={require("../assets/images/user.png")}
             />
-            <Text style={styles.word}>Password Recovery</Text>
-            <Text style={styles.word}>Enter Account Email</Text>
+            <Text style={styles.word1}>Password Recovery</Text>
+            <Text style={styles.word2}>Enter Account Email</Text>
             <Form
               ref={c => (this._form = c)}
               type={RecoveryOne}
               options={options}
             />
-            {/* <Button
-              title="Login"
-              color="#0A802B"
-              onPress={this.handleSubmit}
-              //   style={{ backgroundColor: "#0a802b" }}
-            ></Button> */}
-            <View style={styles.lowText}>
+            <View>
               <Text
                 style={{
                   textAlign: "center",
-                  marginTop: 8,
-                  color: "grey",
+                  marginTop: 5,
                   fontSize: 20,
-                  color: "#650225"
+                  fontWeight: "bold",
+                  color: "blue"
                 }}
                 onPress={() => Linking.openURL("http://google.com")}
               >
-                Send recovery link to my email
+                Send Recovery Link To My Email
               </Text>
             </View>
           </View>
@@ -114,27 +104,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
+  },
+  word1: {
+    fontSize: 25,
+    marginTop: 10,
+    color: "#650225",
     fontWeight: "bold"
   },
-  word: {
-    fontSize: 25,
-    marginTop: 70,
+  word2: {
+    fontSize: 20,
+    marginTop: 10,
     color: "#650225",
     paddingBottom: 40,
-    paddingTop: 20
-  },
-
-  //   words: {
-  //     marginTop: 5,
-  //     color: "#650225"
-  //   },
-  lowText: {
-    marginTop: 22,
-    backgroundColor: "#fff",
-    fontWeight: "bold",
-    color: "#fff",
-    alignItems: "center",
-    paddingTop: 20
+    paddingTop: 20,
+    fontWeight: "bold"
   }
 });

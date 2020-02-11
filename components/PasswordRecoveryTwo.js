@@ -78,10 +78,8 @@ export default class PasswordRecovery extends Component {
           <View style={styles.container}>
             <Image
               style={{
-                width: 300,
-                marginTop: 30,
-                marginBottom: 20,
-                margin: 20
+                width: 250,
+                margin: 30
               }}
               source={require("../assets/images/user.png")}
             />
