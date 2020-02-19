@@ -2,13 +2,17 @@ import React from 'react';
 import { View } from 'react-native';
 
 import Login from './components/Login';
-import SignUp from './components/SignUp';
+//import SignUp from './components/SignUp';
+import ToolBinCard from './components/ToolBinCard';
+//import Personnel from './components/Personnel';
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <Login />
-      <SignUp />
+      {/* <Login /> */}
+      {/* <SignUp /> */}
+      <ToolBinCard /> 
+      {/*<Personnel /> */}
     </View>
   )
 }
