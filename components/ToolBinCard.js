@@ -1,16 +1,21 @@
+
+
+
 import React from 'react';
-import { View,Text} from 'react-native';
+import { View,Text } from 'react-native';
 
+//import Personnel from './components/Personnel';
 
-export default class ToolBinCard extends React.Component {
-    render(){
-  return (
+export default function ToolBinCard() {
+    
+ return (
     <View style={{ flex: 1 }}>
-      {/* <Login /> */}
+     
+      <Text>fghfhf</Text>
       {/* <SignUp /> */}
-      <Text>fhjfj</Text>
+       
       {/*<Personnel /> */}
     </View>
   )
-}
+ 
 }
