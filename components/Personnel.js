@@ -81,7 +81,7 @@ const options = {
             error: "Please use only letters."
         },
         LastName: {
-            error: "Please use only letters."
+            error: "Please use letters."
         },
         DateofBirth: {
             label: "Date of Birth",
