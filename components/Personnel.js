@@ -1,12 +1,30 @@
 import React, { Component } from "react";
 import { ScrollView, View, StyleSheet, Text, Button, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import moment from "moment";
+import DatePicker from "react-datepicker";
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageFactory from "react-native-image-picker-form";
 
 
 var t = require("tcomb-form-native");
+
 const Form = t.form.Form;
+
+/**drop down menu for 'qualification' field. This variable used in struct.*/
+
+var Qualifications = t.enums({
+  PHD: "PhD",
+  Masters: "Masters",
+  Degree: "Degree",
+  Diploma: "Diploma",
+  Certificate: "Certificate",
+  UACE: "A-Level",
+  UCE: "O-Level",
+  PLE: "PLE",
+  None: "None",  
+});
+
+
 
 /** We use regular expression to validate the user input. */
 
@@ -38,13 +56,13 @@ const Person = t.struct({
     FirstName: FirstName,  //string
     LastName: LastName,
     PersonImage: t.String, //imagefile is treated as a string
-    //DateofBirth: t.Date,
+    DateofBirth: t.date,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
     JobTitle: JobTitle,
     //StartDate: t.Date, // 
-    Qualifications: t.String //drop-down select
+    Qualifications: Qualifications //drop-down select
      
 });
 
