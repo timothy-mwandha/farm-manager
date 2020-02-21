@@ -56,12 +56,12 @@ const Person = t.struct({
     FirstName: FirstName,  //string
     LastName: LastName,
     PersonImage: t.String, //imagefile is treated as a string
-    DateofBirth: t.date,
+    //DateofBirth: t.date,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
     JobTitle: JobTitle,
-    //StartDate: t.Date, // 
+    StartDate: t.Date, // 
     Qualifications: Qualifications //drop-down select
      
 });
