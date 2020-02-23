@@ -55,7 +55,7 @@ const JobTitle = t.refinement(t.String, JobTitle => {
 const Person = t.struct({
     FirstName: FirstName,  //string
     LastName: LastName,
-    //DateofBirth: t.Date,
+    DOB: t.Date,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
@@ -100,12 +100,13 @@ const options = {
         LastName: {
             error: "Please use letters."
         },
-        DateofBirth: {
+        DOB: {
             label: "Date of Birth",
             mode: "date",
             error: "Please select date of birth.",
             config: {
-                format: date => moment(date).format("DD-MM-YYYY")
+                format: date => String(date)
+               
             }
         },
         PhoneNumber1: {
@@ -116,17 +117,17 @@ const options = {
             error: "Please use only letters & words."
         },
 
-        StartDate: {
-            label: "Job start date",
-            mode: "date",
-            error: "Please select job start date.",
-            config: {
-                placeholder: "Select start date",
-                format: date => moment(date).format("DD-MM-YYYY")
-                //iconType: "material-community",
-                //iconName: "account-outline"
-            }
-        },
+        // StartDate: {
+        //     label: "Job start date",
+        //     mode: "date",
+        //     error: "Please select job start date.",
+        //     config: {
+        //         placeholder: "Select start date",
+        //         format: date => moment(date).format("DD-MM-YYYY")
+        //         iconType: "material-community",
+        //         iconName: "account-outline"
+        //     }
+        // },
         
         ToolImage: {
             config: {
