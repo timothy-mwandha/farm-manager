@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import { ScrollView, View, Image, StyleSheet, Text, Button, KeyboardAvoidingView, TouchableOpacity } from "react-native";
-import moment from "moment";
-import ImageFactory from "react-native-image-picker-form";
+import { ScrollView, View, StyleSheet, Text, Button, Linking, KeyboardAvoidingView } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
-
-
-
 var t = require("tcomb-form-native");
-
 const Form = t.form.Form;
-
-/**drop down menu for 'qualification' field. This variable used in struct.*/
 
 var Qualifications = t.enums({
   PHD: "PhD",
@@ -23,10 +15,6 @@ var Qualifications = t.enums({
   PLE: "PLE",
   None: "None",  
 });
-
-
-
-/** We use regular expression to validate the user input. */
 
 const FirstName = t.refinement(t.String, FirstName => {
     const regex = /^[a-zA-Z0-9].*[\s\.]*$/i; //case insensitive string with space.
@@ -48,24 +36,32 @@ const JobTitle = t.refinement(t.String, JobTitle => {
     return regex.test(JobTitle);
 });
 
+const Email = t.refinement(t.String, Email => {
+    const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+    return reg.test(Email);
+});
+const Phone = t.refinement(t.Number, Phone => {
+    const reg = /^[0]?[0-9]\d{9}$/;
+    return reg.test(Phone);
+});
+const Name = t.refinement(t.String, Name => {
+    const regex = /^[a-zA-Z].*[\s\.]*$/g;
+    return regex.test(Name);
+});
 
-
-{/** //The tools model is defined using the t.struct() method*/}
-
-const Person = t.struct({
-    FirstName: FirstName,  //string
+const User = t.struct({
+     FirstName: FirstName,  //string
     LastName: LastName,
-    DOB: t.Date,
+    dob:t.Date ,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
     JobTitle: JobTitle,
-    //StartDate: t.Date, // 
-    Qualifications: Qualifications //drop-down select
-     
+   
+    Qualifications: Qualifications
+   
+    
 });
-
-/** Styling the text for labels, valid and invalid input*/
 
 const formStyles = {
     ...Form.stylesheet,
@@ -90,95 +86,41 @@ const formStyles = {
     }
 };
 
-/** Encapsulating the various field options  */
-
 const options = {
     fields: {
         FirstName: {
             error: "Please use only letters."
         },
         LastName: {
-            error: "Please use letters."
+            error: "Please use only letters."
         },
-        DOB: {
-            label: "Date of Birth",
-            mode: "date",
-            error: "Please select date of birth.",
-            config: {
-                format: date => String(date)
-               
-            }
+        dob:{
+            mode:'date'
         },
         PhoneNumber1: {
             error: "Please use only digits."
         },
-        
         JobTitle: {
             error: "Please use only letters & words."
         },
-
-        // StartDate: {
-        //     label: "Job start date",
-        //     mode: "date",
-        //     error: "Please select job start date.",
-        //     config: {
-        //         placeholder: "Select start date",
-        //         format: date => moment(date).format("DD-MM-YYYY")
-        //         iconType: "material-community",
-        //         iconName: "account-outline"
-        //     }
-        // },
-        
-        ToolImage: {
-            config: {
-                title: "Add Personnel's Image",
-                options: ["Open camera", "Select from gallery", "Cancel"],
-                // Used on Android to style BottomSheet
-                style: {
-                    titleFontFamily: "Roboto"
-                }
-            },
-            // error: 'No image provided',
-            factory: ImageFactory
-        }
-
-
     },
     stylesheet: formStyles
-}
+};
 
-type Props = {}
-type State = {
-  value: Object,
-  options: Object
-}
-export default class Personnel extends React.Component <Props, State> {
+export default class Personnel extends Component {
+     constructor(props){
+         super(props);
+        this.state = {
+        image: null,
+
+     }
     
-    constructor(props) {
-      super(props)
-      this.state = {
-        image: null
-      };
-        //value: {},
-    //     options: {
-    //       fields: {
-    //         image: {
-    //           config: {
-    //             title: 'Select image',
-    //             options: ['Open camera', 'Select from gallery', 'Cancel'],
-    //           // Used on Android to style BottomSheet
-    //             style: {
-    //               titleFontFamily: 'Roboto'
-    //           }
-    //         },
-    //           error: 'No image provided',
-    //           factory: ImageFactory
-    //       }
-    //     }
-    //   }
-    // }
-  }
-  componentDidMount() {
+  };
+    handleSubmit = () => {
+        const value = this._form.getValue();
+        console.log("value: ", value);
+    };
+    componentDidMount() {
     this.getPermissionAsync();
     console.log('hi');
   }
@@ -205,33 +147,26 @@ export default class Personnel extends React.Component <Props, State> {
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
-  }
-
-       
-    handleSubmit = () => {
-        const value = this._form.getValue();
-        console.log("value: ", value);
-    }
-
-
-
+  };
 
     render() {
-        let {image} = this.state;
+        let { image } = this.state;
         return (
-            <View>
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled >
                 <ScrollView>
+                    <View>
                         <Text style={styles.title}>Personnel File</Text>
-                        <Form ref={(ref: any) => {this.form = ref}} type={Person} value={this.state.value} options={this.state.options} />
-                        <Button title="Pick an image from camera roll" onPress={this._pickImage}
+                        <Form ref={c => (this._form = c)} type={User} options={options} />
+                        <Button
+          title="Pick an image from camera roll"
+          onPress={this._pickImage}
         />
         {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
                         <View style={styles.button}><Button color="#0A802B" title="Save" onPress={this.handleSubmit} /></View>
+                    </View>
                 </ScrollView>
             </KeyboardAvoidingView>
-            </View>
         );
     }
 }
@@ -244,26 +179,27 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        fontSize: 25,
+        fontSize: 35,
         marginTop: 5,
         color: "#650205",
         textAlign: "center",
         marginBottom: 25
     },
-
-       subtitle: {
-        fontSize: 25,
-        marginTop: 5,
+    question: {
         color: "#650205",
-        textAlign: "center",
-        marginBottom: 25
+        textAlign: 'center',
+        marginTop: 18,
+        fontSize: 18
     },
-  
-       butt: {
-        marginTop: 50,
+    link: {
+        fontWeight: 'bold',
+        color: "#650205",
+        textAlign: 'center',
+        marginTop: 8,
+        fontSize: 20,
+        fontWeight: "bold"
+    },
+    butt: {
+        marginTop: 20,
     }
 });
-
-
-
-
