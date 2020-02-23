@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { ScrollView, View, StyleSheet, Text, Button, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { ScrollView, View, Image, StyleSheet, Text, Button, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import moment from "moment";
-import DatePicker from "react-datepicker";
-import ImagePicker from 'react-native-image-crop-picker';
 import ImageFactory from "react-native-image-picker-form";
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 var t = require("tcomb-form-native");
@@ -55,13 +55,12 @@ const JobTitle = t.refinement(t.String, JobTitle => {
 const Person = t.struct({
     FirstName: FirstName,  //string
     LastName: LastName,
-    PersonImage: t.String, //imagefile is treated as a string
-    //DateofBirth: t.date,
+    //DateofBirth: t.Date,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
     JobTitle: JobTitle,
-    StartDate: t.Date, // 
+    //StartDate: t.Date, // 
     Qualifications: Qualifications //drop-down select
      
 });
@@ -157,37 +156,77 @@ export default class Personnel extends React.Component <Props, State> {
     constructor(props) {
       super(props)
       this.state = {
-        value: {},
-        options: {
-          fields: {
-            image: {
-              config: {
-                title: 'Select image',
-                options: ['Open camera', 'Select from gallery', 'Cancel'],
-              // Used on Android to style BottomSheet
-                style: {
-                  titleFontFamily: 'Roboto'
-              }
-            },
-              error: 'No image provided',
-              factory: ImageFactory
-          }
-        }
+        image: null
+      };
+        //value: {},
+    //     options: {
+    //       fields: {
+    //         image: {
+    //           config: {
+    //             title: 'Select image',
+    //             options: ['Open camera', 'Select from gallery', 'Cancel'],
+    //           // Used on Android to style BottomSheet
+    //             style: {
+    //               titleFontFamily: 'Roboto'
+    //           }
+    //         },
+    //           error: 'No image provided',
+    //           factory: ImageFactory
+    //       }
+    //     }
+    //   }
+    // }
+  }
+  componentDidMount() {
+    this.getPermissionAsync();
+    console.log('hi');
+  }
+
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
       }
     }
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  }
+
        
     handleSubmit = () => {
         const value = this._form.getValue();
         console.log("value: ", value);
-    };
+    }
+
+
+
+
     render() {
+        let {image} = this.state;
         return (
             <View>
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled >
                 <ScrollView>
                         <Text style={styles.title}>Personnel File</Text>
                         <Form ref={(ref: any) => {this.form = ref}} type={Person} value={this.state.value} options={this.state.options} />
+                        <Button title="Pick an image from camera roll" onPress={this._pickImage}
+        />
+        {image &&
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
                         <View style={styles.button}><Button color="#0A802B" title="Save" onPress={this.handleSubmit} /></View>
                 </ScrollView>
             </KeyboardAvoidingView>
