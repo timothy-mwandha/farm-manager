@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   Button,
-  Linking,
+  Image,
   KeyboardAvoidingView
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
