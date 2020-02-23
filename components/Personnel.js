@@ -44,18 +44,6 @@ const JobTitle = t.refinement(t.String, JobTitle => {
   return regex.test(JobTitle);
 });
 
-const Email = t.refinement(t.String, Email => {
-  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
-  return reg.test(Email);
-});
-const Phone = t.refinement(t.Number, Phone => {
-  const reg = /^[0]?[0-9]\d{9}$/;
-  return reg.test(Phone);
-});
-const Name = t.refinement(t.String, Name => {
-  const regex = /^[a-zA-Z].*[\s\.]*$/g;
-  return regex.test(Name);
-});
 
 /** create the structure of the form. Image field is treated separately. */
 const User = t.struct({
@@ -64,7 +52,7 @@ const User = t.struct({
   DateOfBirth: t.Date, //date picker
   PhoneNumber1: PhoneNumber1, //number
   PhoneNumber2: t.maybe(t.Number), //optional number
-  NIN: t.maybe(t.Number), //optional number
+  NationalIdNo: t.maybe(t.String), //optional number
   JobTitle: JobTitle, //string
   JobStartDate: t.Date, //date picker
   Qualifications: Qualifications //drop down select t.enums
@@ -168,7 +156,7 @@ export default class Personnel extends Component {
             <Text style={styles.title}>Personnel File</Text>
             <Form ref={c => (this._form = c)} type={User} options={options} />
             <Button
-              title="Pick an image from camera roll"
+              title="Select Image."
               onPress={this._pickImage}
             />
             {image && (
@@ -210,15 +198,9 @@ const styles = StyleSheet.create({
     marginTop: 18,
     fontSize: 18
   },
-  link: {
-    fontWeight: "bold",
-    color: "#650205",
-    textAlign: "center",
-    marginTop: 8,
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  butt: {
-    marginTop: 20
+
+  button: {
+    marginTop: 20,
+    marginBottom:20
   }
 });
