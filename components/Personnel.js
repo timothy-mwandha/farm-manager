@@ -52,12 +52,12 @@ const Name = t.refinement(t.String, Name => {
 const User = t.struct({
      FirstName: FirstName,  //string
     LastName: LastName,
-    dob:t.Date ,
+    DateOfBirth: t.Date ,
     PhoneNumber1: PhoneNumber1,
     PhoneNumber2: t.maybe(t.Number),
     NIN: t.maybe(t.Number), 
     JobTitle: JobTitle,
-   
+    JobStartDate: t.Date ,
     Qualifications: Qualifications
    
     
@@ -94,7 +94,10 @@ const options = {
         LastName: {
             error: "Please use only letters."
         },
-        dob:{
+        DateOfBirth:{
+            mode:'date'
+        },
+        JobStartDate:{
             mode:'date'
         },
         PhoneNumber1: {
