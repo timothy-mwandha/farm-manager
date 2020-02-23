@@ -60,14 +60,14 @@ const Name = t.refinement(t.String, Name => {
 /** create the structure of the form. Image field is treated separately. */
 const User = t.struct({
   FirstName: FirstName, //string
-  LastName: LastName,
-  DateOfBirth: t.Date,
-  PhoneNumber1: PhoneNumber1,
-  PhoneNumber2: t.maybe(t.Number),
-  NIN: t.maybe(t.Number),
-  JobTitle: JobTitle,
-  JobStartDate: t.Date,
-  Qualifications: Qualifications
+  LastName: LastName, //string
+  DateOfBirth: t.Date, //date picker
+  PhoneNumber1: PhoneNumber1, //number
+  PhoneNumber2: t.maybe(t.Number), //optional number
+  NIN: t.maybe(t.Number), //optional number
+  JobTitle: JobTitle, //string
+  JobStartDate: t.Date, //date picker
+  Qualifications: Qualifications //drop down select t.enums
 });
 
 const formStyles = {
