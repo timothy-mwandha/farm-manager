@@ -156,7 +156,7 @@ type State = {
   value: Object,
   options: Object
 }
-export default class ToolBenCard extends React.Component<Props, State> {
+export default class ToolBinCard extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {

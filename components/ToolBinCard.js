@@ -1,268 +1,209 @@
-import 'react-native-gesture-handler';
 import React, { Component } from "react";
-
-import { ScrollView, View, StyleSheet, 
-Text, Button, KeyboardAvoidingView,Image, 
-TouchableOpacity, NativeModules, 
-Dimensions } from "react-native";
-
-import moment from "moment";
-import Video from 'react-native-video';
-import ImagePicker from 'react-native-image-crop-picker';
-import ImageFactory from "react-native-image-picker-form";
-
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Image,
+  KeyboardAvoidingView
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
 
-
-/** We use regular expression to validate the user input. */
+var ToolCondition = t.enums({
+  GoodWorkingOrder: "Good Working Order",
+  ToolNeedsMaintenance: "Tool Needs Maintenance",
+  DamagedNotWorking: "Damaged, Not Working",
+  Misplaced: "Misplaced or Lost",
+  BoardedOff: "Boarded Off"
+ });
 
 const ToolName = t.refinement(t.String, ToolName => {
-    const regex = /^[a-zA-Z0-9].*[\s\.]*$/i; //case insensitive//alphanumeric//with spaces.
-    return regex.test(ToolName);
+  const regex = /^[a-zA-Z0-9].*[\s\.]*$/i; //case insensitive string with space.
+  return regex.test(ToolName);
 });
 
-const SerialNumber = t.refinement(t.String, SerialNumber => {
-    const regex = /^[a-zA-Z0-9].*[\s\.]*$/g; //alphanumeric with spaces
-    return regex.test(SerialNumber);
+const TakenBy = t.refinement(t.String, TakenBy => {
+  const regex = /^[a-zA-Z].*[\s\.]*$/i; //case insensitive string with space
+  return regex.test(TakenBy);
+});
+
+
+const Desription = t.refinement(t.String, Desription => {
+  const regex = /^[a-zA-Z].*[\s\.]*$/i; //case insensitive string with space
+  return regex.test(Desription);
 });
 
 const StoreName = t.refinement(t.String, StoreName => {
-    const regex = /^[a-zA-Z0-9].*[\s\.]*$/i; //case insensitive//alphanumeric//with spaces.
-    return regex.test(StoreName);
-});
-
-const ToolTakenBy = t.refinement(t.String, ToolTakenBy => {
-    const regex = /^[a-zA-Z0-9].*[\s\.]*$/i; //case insensitive//alphanumeric//with spaces.
-    return regex.test(ToolTakenBy);
+  const regex = /^[a-zA-Z].*[\s\.]*$/i; //case insensitive string with space
+  return regex.test(StoreName);
 });
 
 
-
-/** The tools model is defined using the t.struct() method*/
-
-const Tool = t.struct({
-    ToolName: ToolName,  //alphanumric. 
-    Description: t.maybe(t.String),
-    DateTakenIn: t.Date, // UI = calendar popup.
-    StoreName: StoreName, // string. UI = text input box
-    DateTakenOut: t.Date, //UI = calendar popup.
-    ToolTakenBy: ToolTakenBy, // string. UI =  text input box
-    ToolCondition: t.String, // string. UI = text input box
-    DateOfPurchase: t.maybe(t.Date),//UI = calendar popup.
-    SerialNumber: t.maybe(SerialNumber),  
-    ToolImage: t.String //imagefiletype UI = upload image
+/** create the structure of the form. Image field is treated separately. */
+const User = t.struct({
+  ToolName: ToolName, //string
+  Description: t.String, //string
+  //DateTakenIn: t.Date, //date picker
+  StoreName: t.String, //string
+  //DateTakenOut: t.Date, //date picker
+  TakenBy: t.String, //string
+  ToolCondition: ToolCondition, //drop down select t.enums
+  //DateOfPurchase: t.Date,
+  SerialNumber: t.String //string
 });
-
-/** Styling the text for labels, valid and invalid input*/
 
 const formStyles = {
-    ...Form.stylesheet,
-    formGroup: {
-        normal: {
-            textAlign: 'center',
-            justifyContent: 'center',
-            marginBottom: 5
-        }
-    },
-    controlLabel: {
-        normal: {
-            color: "#650205",
-            fontSize: 20,
-            marginBottom: 5
-        },
-
-        error: {
-            color: "red",
-            fontSize: 18,
-            marginBottom: 7,
-            fontWeight: "600"
-        }
+  ...Form.stylesheet,
+  formGroup: {
+    normal: {
+      marginBottom: 5
     }
+  },
+  controlLabel: {
+    normal: {
+      color: "#650205",
+      fontSize: 20,
+      marginBottom: 5
+    },
+
+    error: {
+      color: "red",
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: "600"
+    }
+  }
 };
 
-/** Encapsulating the various field options  */
-
+/** define extra options of the form fields. */
 const options = {
-    fields: {
-        ToolName: {
-            error: "Please use only letters & digits."
-        },
-        SerialNumber: {
-            error: "Please use only letters & digits."
-        },
-        Description: {
-            error: "Please use only letters and words."
-        },
-        
-        DateTakenIn: {
-            label: "Date Taken In",
-            mode: "date",
-            error: "Please enter date tool was stored.",
-            config: {
-                format: date => moment(date).format("DD-MM-YYYY")
-            }
-        },
-        StoreName: {
-            error: "Please use only letters & digits."
-        },
-        
-        DateTakenOut: {
-            label: "Date Taken Out",
-            mode: "date",
-            error: "Please enter date tool was taken out.",
-            config: {
-                format: date => moment(date).format("DD-MM-YYYY")
-            }
-        },
-        
-        ToolTakenBy: {
-            error: "Please use only letters & digits."
-        },
-        ToolCondition: {
-            error: "Please select one option."
-        },
-
-        DateOfPurchase: {
-            label: "Date of Purchase",
-            mode: "date",
-            error: "Please enter date tool was purchased.",
-            config: {
-                format: date => moment(date).format("DD-MM-YYYY")
-            }
-        },
-
-
-        ToolImage: {
-            config: {
-                title: "Add Tool Image",
-                options: ["Open camera", "Select from gallery", "Cancel"],
-                // Used on Android to style BottomSheet
-                style: {
-                    titleFontFamily: "Roboto"
-                }
-            },
-            // error: 'No Tool image provided',
-            factory: ImageFactory
-        }
-
-        
+  fields: {
+    ToolName: {
+      error: "Please use only letters."
     },
-    stylesheet: formStyles
-}
+    Description: {
+      error: "Please explain what the tool is exactly."
+    },
+    DateTakenIn: {
+      mode: "date"
+    },
+    StoreName: {
+      error: "Please where the tool is being kept."
+    },
+    DateTakenOut: {
+      mode: "date"
+    },
+    TakenBy: {
+      error: "Please enter persons name."
+    },
+    DateOfPurchare: {
+      mode: "date"
+    },
+    SerialNumber: {
+      error: "Please use letters & numbers."
+    }
+  },
+  stylesheet: formStyles
+};
+/** class based component */
 
-type Props = {}
-type State = {
-  value: Object,
-  options: Object
-}
-export default class ToolBinCard extends React.Component<Props, State> {
+export default class ToolBinCard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      value: {},
-      options: {
-        fields: {
+      image: null
+    };
+  }
+  handleSubmit = () => {
+    const value = this._form.getValue();
+    console.log("value: ", value);
+  };
+  componentDidMount() {
+    this.getPermissionAsync();
+    console.log("hi");
+  }
 
-          image: {
-            config: {
-              title: 'Select image',
-              options: ['Open camera', 'Select from gallery', 'Cancel'],
-              // Used on Android to style BottomSheet
-              style: {
-                titleFontFamily: 'Roboto'
-              }
-            },
-            error: 'No image provided',
-            factory: ImageFactory
-          }
-        }
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
       }
     }
-  }    
-    
+  };
 
-    
-render() {
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
 
-handleSubmit = () => {
-        const value = this.refs.tool.getValue();
-        console.log("value: ", value);
-    };
+    console.log(result);
 
-
-ImagePicker.openPicker({
-  width: 300,
-  height: 400,
-  cropping: true
-}).then(image => {
-  console.log(image);
-});
-
-ImagePicker.openCamera({
-  width: 300,
-  height: 400,
-  cropping: true,
-}).then(image => {
-  console.log(image);
-});
-
-
-ImagePicker.openCropper({
-  path: 'my-file-path.jpg',
-  width: 300,
-  height: 400
-}).then(image => {
-  console.log(image);
-});
-
-
-
-        return (
-            <View>
-            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled >
-                <ScrollView>
-                        <Text style={styles.subtitle}>Tool Bin Card</Text>
-                       
-                        <Form ref='tool'
-                        type={Tool}
-                        value={this.state.value}
-                        options={this.state.options}
-                        // onPress={(options)=>this.ImagePicker.openPicker()} 
-                        />
-                        <View style={styles.button}><Button color="#0A802B" title="Save" onPress={this.handleSubmit} /></View>
-                </ScrollView>
-            </KeyboardAvoidingView>
-            </View>
-        );
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
     }
+  };
+
+  render() {
+    let { image } = this.state;
+    return (
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+        <ScrollView>
+          <View>
+            <Text style={styles.title}>Tool Bin Card</Text>
+            <Form ref={c => (this._form = c)} type={User} options={options} />
+            <Button
+              title="Select Image."
+              onPress={this._pickImage}
+            />
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 200, height: 200 }}
+              />
+            )}
+            <View style={styles.button}>
+              <Button
+                color="#0A802B"
+                title="Save"
+                onPress={this.handleSubmit}
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        marginTop: 24,
-        padding: 20,
+  container: {
+    justifyContent: "center",
+    marginTop: 24,
+    padding: 20
+  },
+  title: {
+    fontSize: 35,
+    marginTop: 5,
+    color: "#650205",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  question: {
+    color: "#650205",
+    textAlign: "center",
+    marginTop: 18,
+    fontSize: 18
+  },
 
-    },
-    title: {
-        fontSize: 35,
-        marginTop: 5,
-        color: "#650205",
-        textAlign: "center",
-        marginBottom: 25
-    },
-
-       subtitle: {
-        fontSize: 35,
-        marginTop: 5,
-        color: "#650205",
-        textAlign: "center",
-        marginBottom: 25
-    },
-  
-       butt: {
-        marginTop: 100,
-    }
+  button: {
+    marginTop: 20,
+    marginBottom:20
+  }
 });
-
