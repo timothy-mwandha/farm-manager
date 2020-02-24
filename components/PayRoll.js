@@ -199,7 +199,6 @@ export default class PayRoll extends Component {
   }
   handleSubmit = event => {
     const value = this._form.getValue();
-    // event.preventDefault();
     console.log("value: ", value);
   };
 

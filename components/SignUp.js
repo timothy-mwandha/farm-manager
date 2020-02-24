@@ -113,7 +113,6 @@ class SignUp extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    // marginTop: 24
     padding: 20
   },
   title: {

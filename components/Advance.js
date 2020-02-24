@@ -9,19 +9,10 @@ import {
   KeyboardAvoidingView,
   TouchableHighlight
 } from "react-native";
-// import moment from "moment";
-// import ImageFactory from "react-native-image-picker-form";
-// import ImagePicker from 'react-native-image-crop-picker';
-// import ImagePicker from 'react-native-image-picker';
 
-// var ImagePicker = require('react-native-image-picker');
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
 
-// const MobileMoneyNumber = t.refinement(t.Number, MobileMoneyNumber => {
-//   const reg = /^[0]?[0-9]\d{9}$/;
-//   return reg.test(MobileMoneyNumber);
-// });
 const Name = t.refinement(t.String, Name => {
   const regex = /^[a-zA-Z].*[\s\.]*$/g;
   return regex.test(Name);
@@ -129,7 +120,6 @@ export default class Advance extends Component {
   }
   handleSubmit = event => {
     const value = this._form.getValue();
-    // event.preventDefault();
     console.log("value: ", value);
   };
 
