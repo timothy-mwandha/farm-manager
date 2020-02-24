@@ -8,8 +8,9 @@ import Harvest from './components/Harvest';
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <Login />
-      <SignUp />
+      {/* <Login /> */}
+      {/* <SignUp /> */}
+      <Harvest/>
     </View>
   )
 }

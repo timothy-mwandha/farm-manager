@@ -88,11 +88,9 @@ export default class Consumable extends Component {
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled onPress={() => { Keyboard.dismiss(); }}>
                 <ScrollView>
                     <View>
-                        <View style={{ backgroundColor: 'grey' }}>
+                        <View>
                             <View><Text style={styles.text}>New Harvest</Text></View>
                         </View>
-                        <View style={styles.horizontal}
-                        />
                         <Form ref={c => (this._form = c)} type={User} options={options} />
                         <TouchableHighlight>
                             <View style={styles.button}><Button color="#0A802B" title="Save" onPress={this.handleSubmit} /></View>
@@ -117,6 +115,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         color: "#650205",
+        marginBottom:20
     },
     question: {
         color: "#650205",
@@ -134,10 +133,5 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 20,
-    },
-    horizontal: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
-        marginBottom: 15
     }
 });
