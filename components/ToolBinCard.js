@@ -46,12 +46,12 @@ const StoreName = t.refinement(t.String, StoreName => {
 const User = t.struct({
   ToolName: ToolName, //string
   Description: t.String, //string
-  //DateTakenIn: t.Date, //date picker
+  DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
-  //DateTakenOut: t.Date, //date picker
+  DateTakenOut: t.Date, //date picker
   TakenBy: t.String, //string
   ToolCondition: ToolCondition, //drop down select t.enums
-  //DateOfPurchase: t.Date,
+  DateOfPurchase: t.Date,
   SerialNumber: t.String //string
 });
 
@@ -99,7 +99,7 @@ const options = {
     TakenBy: {
       error: "Please enter persons name."
     },
-    DateOfPurchare: {
+    DateOfPurchase: {
       mode: "date"
     },
     SerialNumber: {
