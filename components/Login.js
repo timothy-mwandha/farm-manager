@@ -64,6 +64,7 @@ class Login extends Component {
     const value = this._form.getValue();
     console.log("value: ", value);
   };
+
   render() {
     return (
       <KeyboardAvoidingView
