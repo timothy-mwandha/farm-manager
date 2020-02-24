@@ -76,29 +76,18 @@ const formStyles = {
 const options = {
     fields: {
         Name: {
-            placeholder: 'Name',
             error: "Please enter a correct Name"
         },
         Quantity: {
-            placeholder: 'Quantity',
             error: "Please enter correct quantity value"
         },
         QuantityUsed: {
-            placeholder: 'Quantity Used',
             error: "Please enter correct quantity value"
         },
         QuantityBalance: {
-            placeholder: 'Quantity Balance',
             error: "Please enter correct quantity value"
         },
-        Notification: {
-            placeholder: 'Notification'
-        },
-        Description: {
-            placeholder: 'Description'
-        },
         TakenBy: {
-            placeholder: 'Taken By',
             error: 'Please enter in letters'
         },
     },

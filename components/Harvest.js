@@ -51,25 +51,19 @@ const options = {
             error: "Please enter harvest date"
         },
         Quantity: {
-            placeholder: 'Quantity',
             error: "Please enter correct quantity value"
         },
         Units: {
-            placeholder: 'Units',
             error: "Please enter correct unit value"
         },
         Source: {
-            placeholder: 'Source',
             error: "Please enter source"
         },
         Store: {
-            placeholder: 'Store',
             error: 'Please provide store name'
 
         },
         Description: {
-            textarea: 'Description',
-            placeholder: 'Description',
             error: 'Please provide description'
         },
     },
@@ -81,7 +75,6 @@ export default class Consumable extends Component {
         const value = this._form.getValue();
         console.log("value: ", value);
     };
-
 
     render() {
         return (
