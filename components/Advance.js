@@ -9,8 +9,8 @@ import {
   KeyboardAvoidingView,
   TouchableHighlight
 } from "react-native";
-import moment from "moment";
-import ImageFactory from "react-native-image-picker-form";
+// import moment from "moment";
+// import ImageFactory from "react-native-image-picker-form";
 // import ImagePicker from 'react-native-image-crop-picker';
 // import ImagePicker from 'react-native-image-picker';
 
@@ -18,19 +18,13 @@ import ImageFactory from "react-native-image-picker-form";
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
 
-const MobileMoneyNumber = t.refinement(t.Number, MobileMoneyNumber => {
-  const reg = /^[0]?[0-9]\d{9}$/;
-  return reg.test(MobileMoneyNumber);
-});
+// const MobileMoneyNumber = t.refinement(t.Number, MobileMoneyNumber => {
+//   const reg = /^[0]?[0-9]\d{9}$/;
+//   return reg.test(MobileMoneyNumber);
+// });
 const Name = t.refinement(t.String, Name => {
   const regex = /^[a-zA-Z].*[\s\.]*$/g;
   return regex.test(Name);
-});
-
-var PaymentMode = t.enums({
-  Cash: "Cash",
-  Bank: "Bank",
-  MobileMoney: "Mobile Money"
 });
 
 var Gender = t.enums({
@@ -43,11 +37,6 @@ var Status = t.enums({
   Temporary: "Temporary"
 });
 
-var Tax = t.enums({
-  VAT: "Value Added Tax",
-  WHT: "Withholding Tax"
-});
-
 const User = t.struct({
   ...Form.User,
   Date: t.Date,
@@ -55,17 +44,8 @@ const User = t.struct({
   Gender: Gender,
   Position: t.maybe(t.String),
   Status: Status,
-  PaymentMode: PaymentMode,
-  SalaryAmount: t.Number,
-  PAYE: t.maybe(t.Number),
-  NSSF1: t.maybe(t.Number),
-  NSSF2: t.maybe(t.Number),
-  Tax: t.maybe(Tax),
-  LST: t.maybe(t.Number),
-  Advance: t.maybe(t.Number),
-  NetPay: t.Number,
-  PaySlip: t.maybe(t.String),
-  Total: t.Number
+  AdvancedAmount: t.Number,
+  Decription: t.maybe(t.String)
 });
 
 const formStyles = {
@@ -126,75 +106,25 @@ const options = {
       error: "Please enter the status of the employee",
       returnKeyType: "next"
     },
-    PaymentMode: {
-      label: "Payment Mode",
-      error: "Please select a mode of payment",
+    AdvancedAmount: {
+      label: "Amount",
+      error: "Please enter a correct advance Amount",
       returnKeyType: "next"
     },
-    SalaryAmount: {
-      label: "Salary Amount",
-      error: "Please enter a correct Salary Amount",
-      returnKeyType: "next"
-    },
-    PAYE: {
-      label: "PAYE",
-      error: "PAYE is missing",
-      returnKeyType: "next"
-    },
-    NSSF1: {
-      label: "NSSF(5%)",
-      error: "NSSF is missing",
-      returnKeyType: "next"
-    },
-    NSSF2: {
-      label: "NSSF(10%)",
-      error: "NSSF is missing",
-      returnKeyType: "next"
-    },
-    Tax: {
-      label: "Tax",
-      error: "Tax is missing",
-      returnKeyType: "next"
-    },
-    LST: {
-      label: "Local Service Tax",
-      error: "LST is missing",
-      returnKeyType: "next"
-    },
-    Advance: {
-      label: "Salary Advance",
-      error: "Advance missing",
-      returnKeyType: "next"
-    },
-    NetPay: {
-      label: "Net Pay",
-      error: "Net pay is missing",
-      returnKeyType: "next"
-    },
-    PaySlip: {
-      label: "Pay Slip",
-      returnKeyType: "next",
+    Description: {
+      label: "Description",
+      error: "Put a description",
       config: {
-        title: "Select Pay Slip Image",
-        options: ["Open camera", "Select from gallery", "Cancel"],
-        style: {
-          titleFontFamily: "Roboto"
-        }
-      },
-      factory: ImageFactory
-    },
-    Total: {
-      label: "Total",
-      error: "Total is missing"
+        multiline: true
+      }
     }
   },
   stylesheet: formStyles
 };
 
-export default class PayRoll extends Component {
+export default class Advance extends Component {
   constructor() {
     super();
-
     this.state = {};
   }
   handleSubmit = event => {
@@ -208,7 +138,7 @@ export default class PayRoll extends Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <ScrollView>
           <View>
-            <Text style={styles.title}>Payroll Form</Text>
+            <Text style={styles.title}>Advance Form</Text>
             <Form ref={c => (this._form = c)} type={User} options={options} />
             <TouchableHighlight>
               <View style={styles.button}>
