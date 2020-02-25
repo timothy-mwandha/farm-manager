@@ -47,6 +47,7 @@ const User = t.struct({
   ToolName: ToolName, //string
   Description: t.String, //string
 <<<<<<< HEAD
+<<<<<<< HEAD
   //DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   //DateTakenOut: t.Date, //date picker
@@ -54,12 +55,17 @@ const User = t.struct({
   ToolCondition: ToolCondition, //drop down select t.enums
   //DateOfPurchase: t.Date,
 =======
+=======
+>>>>>>> tk-#004-BinCard-devTim
   DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   DateTakenOut: t.Date, //date picker
   TakenBy: t.String, //string
   ToolCondition: ToolCondition, //drop down select t.enums
   DateOfPurchase: t.Date,
+<<<<<<< HEAD
+>>>>>>> tk-#004-BinCard-devTim
+=======
 >>>>>>> tk-#004-BinCard-devTim
   SerialNumber: t.String //string
 });
@@ -109,7 +115,11 @@ const options = {
       error: "Please enter persons name."
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     DateOfPurchare: {
+=======
+    DateOfPurchase: {
+>>>>>>> tk-#004-BinCard-devTim
 =======
     DateOfPurchase: {
 >>>>>>> tk-#004-BinCard-devTim
@@ -144,7 +154,11 @@ export default class ToolBinCard extends Component {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
 <<<<<<< HEAD
+<<<<<<< HEAD
         alert("Sorry, we need camera roll permissions to make this work!");
+=======
+        alert("Sorry, get camera permissions first!");
+>>>>>>> tk-#004-BinCard-devTim
 =======
         alert("Sorry, get camera permissions first!");
 >>>>>>> tk-#004-BinCard-devTim

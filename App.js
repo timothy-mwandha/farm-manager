@@ -5,8 +5,11 @@ import { View,Text } from 'react-native';
 //import SignUp from './components/SignUp';
 import ToolBinCard from './components/ToolBinCard';
 <<<<<<< HEAD
+<<<<<<< HEAD
 //import Personnel from './components/Personnel';
 =======
+=======
+>>>>>>> tk-#004-BinCard-devTim
 import Personnel from './components/Personnel';
 >>>>>>> tk-#004-BinCard-devTim
 
@@ -17,8 +20,14 @@ export default function App() {
       {/* <Text>fghfhf</Text> */}
       {/* <SignUp /> */}
 <<<<<<< HEAD
+<<<<<<< HEAD
       <ToolBinCard />
       {/*<Personnel /> */}
+=======
+      <Personnel />
+      <ToolBinCard />
+      
+>>>>>>> tk-#004-BinCard-devTim
 =======
       <Personnel />
       <ToolBinCard />
