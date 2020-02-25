@@ -46,12 +46,21 @@ const StoreName = t.refinement(t.String, StoreName => {
 const User = t.struct({
   ToolName: ToolName, //string
   Description: t.String, //string
+<<<<<<< HEAD
   //DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   //DateTakenOut: t.Date, //date picker
   TakenBy: t.String, //string
   ToolCondition: ToolCondition, //drop down select t.enums
   //DateOfPurchase: t.Date,
+=======
+  DateTakenIn: t.Date, //date picker
+  StoreName: t.String, //string
+  DateTakenOut: t.Date, //date picker
+  TakenBy: t.String, //string
+  ToolCondition: ToolCondition, //drop down select t.enums
+  DateOfPurchase: t.Date,
+>>>>>>> tk-#004-BinCard-devTim
   SerialNumber: t.String //string
 });
 
@@ -99,7 +108,11 @@ const options = {
     TakenBy: {
       error: "Please enter persons name."
     },
+<<<<<<< HEAD
     DateOfPurchare: {
+=======
+    DateOfPurchase: {
+>>>>>>> tk-#004-BinCard-devTim
       mode: "date"
     },
     SerialNumber: {
@@ -130,7 +143,11 @@ export default class ToolBinCard extends Component {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
+<<<<<<< HEAD
         alert("Sorry, we need camera roll permissions to make this work!");
+=======
+        alert("Sorry, get camera permissions first!");
+>>>>>>> tk-#004-BinCard-devTim
       }
     }
   };
