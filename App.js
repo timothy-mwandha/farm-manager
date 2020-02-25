@@ -1,9 +1,9 @@
 import React from 'react';
 import { View,Text } from 'react-native';
 
-import Login from './components/Login';
+//import Login from './components/Login';
 //import SignUp from './components/SignUp';
-//import ToolBinCard from './components/toolben';
+import ToolBinCard from './components/ToolBinCard';
 import Personnel from './components/Personnel';
 
 export default function App() {
@@ -12,8 +12,9 @@ export default function App() {
       {/*<Login /> */}
       {/* <Text>fghfhf</Text> */}
       {/* <SignUp /> */}
-      {/*<ToolBinCard /> */}
       <Personnel />
+      <ToolBinCard />
+      
     </View>
   )
 }
