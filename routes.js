@@ -9,7 +9,7 @@ const connection = mysql.createPool ({
     database: 'farmmanager'
 });
 
-/**starting the app */
+/**starting the server */
 const server = express();
 
 /** creating a GET route */
