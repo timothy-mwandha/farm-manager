@@ -12,30 +12,33 @@ import {
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
+const Email = t.refinement(t.String, Email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(Email);
+});
 
-const RecoveryTwo = t.struct({
-  NewPassword: t.String,
-  ConfirmPassword: t.String
+const RecoveryOne = t.struct({
+  Email: Email
 });
 
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
     normal: {
-      marginBottom: 10
+      marginBottom: 20
     }
   },
   controlLabel: {
     normal: {
       color: "#650225",
       fontSize: 20,
-      marginBottom: 5
+      marginBottom: 7
     },
 
     error: {
       color: "red",
       fontSize: 12,
-      marginBottom: 5,
+      marginBottom: 7,
       fontWeight: "bold"
     }
   }
@@ -43,25 +46,14 @@ const formStyles = {
 
 const options = {
   fields: {
-    NewPassword: {
-      error: "Please create a new password",
-      password: true,
-      secureTextEntry: true
-    },
-    ConfirmPassword: {
-      error: "Password should match the one above",
-      password: true,
-      secureTextEntry: true
+    Email: {
+      error: "Please enter a valid email"
     }
   },
   stylesheet: formStyles
 };
 
 export default class PasswordRecovery extends Component {
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log("value: ", value);
-  };
   render() {
     return (
       <KeyboardAvoidingView
@@ -77,22 +69,30 @@ export default class PasswordRecovery extends Component {
         <ScrollView>
           <View style={styles.container}>
             <Image
-              style={{
-                width: 250,
-                margin: 30
-              }}
-              source={require("../assets/images/user.png")}
+              style={{ width: 250, margin: 30 }}
+              source={require("../images/user.png")}
             />
+            <Text style={styles.word1}>Password Recovery</Text>
+            <Text style={styles.word2}>Enter Account Email</Text>
             <Form
               ref={c => (this._form = c)}
-              type={RecoveryTwo}
+              type={RecoveryOne}
               options={options}
             />
-            <Button
-              title="SUBMIT"
-              color="#0A802B"
-              onPress={this.handleSubmit}
-            ></Button>
+            <View>
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginTop: 5,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "blue"
+                }}
+                onPress={() => Linking.openURL("http://google.com")}
+              >
+                Send Recovery Link To My Email
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -104,14 +104,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
+  },
+  word1: {
+    fontSize: 25,
+    marginTop: 10,
+    color: "#650225",
     fontWeight: "bold"
   },
-  word: {
-    fontSize: 25,
-    marginTop: 70,
+  word2: {
+    fontSize: 20,
+    marginTop: 10,
     color: "#650225",
     paddingBottom: 40,
-    paddingTop: 20
+    paddingTop: 20,
+    fontWeight: "bold"
   }
 });
