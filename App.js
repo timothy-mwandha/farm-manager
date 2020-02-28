@@ -16,15 +16,24 @@ import ToolBinCard from './components/ToolBinCard';
 import Personnel from './components/Personnel';
 
 
+
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Harvest from './components/Harvest';   
+
 const Stack = createStackNavigator();
+
 
 function App() {
   return (
 
     <View style={{ flex: 1 }}>
 
+    
+      <Harvest/>
+
+
       {/*<Login /> */}
-      {/* <Text>fghfhf</Text> */}
       {/* <SignUp /> */}
       <Personnel />
       <ToolBinCard />
@@ -35,6 +44,7 @@ function App() {
       {/* <PayRoll /> */}
       {/* <PasswordRecoveryOne /> */}
       <PasswordRecoveryTwo />
+
 
     </View>
 
