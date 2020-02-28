@@ -34,7 +34,8 @@ server.use(
 
 // Route to fetch the index page
 server.get("/", function(req, res) {
-  res.sendfile(js_dir + "Home.js");
+  // res.sendfile(js_dir + "Home.js");
+  res.send("hello select a product!");
 });
 
 // Route to fetch the register page
