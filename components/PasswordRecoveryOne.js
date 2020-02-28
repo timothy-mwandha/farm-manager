@@ -6,8 +6,8 @@ import {
   Text,
   Button,
   KeyboardAvoidingView,
-  TouchableOpacity,
-  Linking
+  Linking,
+  Image
 } from "react-native";
 
 var t = require("tcomb-form-native");
@@ -17,9 +17,8 @@ const Email = t.refinement(t.String, Email => {
   return reg.test(Email);
 });
 
-const User = t.struct({
-  Email: Email,
-  Password: t.String
+const RecoveryOne = t.struct({
+  Email: Email
 });
 
 const formStyles = {
@@ -49,22 +48,12 @@ const options = {
   fields: {
     Email: {
       error: "Please enter a valid email"
-    },
-    Password: {
-      error: "Please enter password",
-      Password: true,
-      secureTextEntry: true
     }
   },
   stylesheet: formStyles
 };
 
-class Login extends Component {
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log("value: ", value);
-  };
-
+export default class PasswordRecovery extends Component {
   render() {
     return (
       <KeyboardAvoidingView
@@ -79,38 +68,29 @@ class Login extends Component {
       >
         <ScrollView>
           <View style={styles.container}>
-            <Text style={styles.word}>Welcome</Text>
-            <Form ref={c => (this._form = c)} type={User} options={options} />
-            <Button
-              title="Login"
-              color="#0A802B"
-              onPress={this.handleSubmit}
-              style={{ backgroundColor: "#0a802b" }}
-            ></Button>
-            <View style={styles.lowText}>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  marginBottom: 8,
-                  color: "grey"
-                }}
-                onPress={() => Linking.openURL("http://google.com")}
-              >
-                Forgot Password?
-              </Text>
-              <Text>Don't have an account?</Text>
+            <Image
+              style={{ width: 250, margin: 30 }}
+              source={require("../assets/images/user.png")}
+            />
+            <Text style={styles.word1}>Password Recovery</Text>
+            <Text style={styles.word2}>Enter Account Email</Text>
+            <Form
+              ref={c => (this._form = c)}
+              type={RecoveryOne}
+              options={options}
+            />
+            <View>
               <Text
                 style={{
                   textAlign: "center",
-                  marginTop: 8,
-                  color: "grey",
+                  marginTop: 5,
                   fontSize: 20,
-                  color: "#650225"
+                  fontWeight: "bold",
+                  color: "blue"
                 }}
                 onPress={() => Linking.openURL("http://google.com")}
               >
-                Sign Up
+                Send Recovery Link To My Email
               </Text>
             </View>
           </View>
@@ -124,28 +104,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
+  },
+  word1: {
+    fontSize: 25,
+    marginTop: 10,
+    color: "#650225",
     fontWeight: "bold"
   },
-  word: {
-    fontSize: 25,
-    marginTop: 70,
+  word2: {
+    fontSize: 20,
+    marginTop: 10,
     color: "#650225",
     paddingBottom: 40,
-    paddingTop: 20
-  },
-  words: {
-    marginTop: 5,
-    color: "#650225"
-  },
-  lowText: {
-    marginTop: 22,
-    backgroundColor: "#fff",
-    fontWeight: "bold",
-    color: "#fff",
-    alignItems: "center",
-    paddingTop: 20
+    paddingTop: 20,
+    fontWeight: "bold"
   }
 });
-
-export default Login;
