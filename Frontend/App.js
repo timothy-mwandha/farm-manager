@@ -4,12 +4,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import SignUp from "./src/components/SignUp";
-import Login from "./src/components/Login";
-import PayRoll from "./src/components/PayRoll";
-import PasswordRecoveryOne from "./src/components/PasswordRecoveryOne";
-import PasswordRecoveryTwo from "./src/components/PasswordRecoveryTwo";
-import Advance from "./src/components/Advance";
+
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import PayRoll from "./components/PayRoll";
+import PasswordRecoveryOne from "./components/PasswordRecoveryOne";
+import PasswordRecoveryTwo from "./components/PasswordRecoveryTwo";
+import Advance from "./components/Advance";
+import ToolBinCard from './components/ToolBinCard';
+import Personnel from './components/Personnel';
+import ExpenditureForm from './components/ExpenditureForm';
+import Harvest from './components/Harvest';  
 
 const Stack = createStackNavigator();
 
@@ -18,12 +23,18 @@ export default class App extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {/* <Login /> */}
-        <SignUp />
-        {/* <PayRoll /> */}
-        {/* <PasswordRecoveryOne /> */}
-        {/* <PasswordRecoveryTwo /> */}
-        {/* <MainC /> */}
+        <Harvest/>
+      <Personnel />
+      <ToolBinCard />
+      {/* <Login /> */}
+      {/* <SignUp /> */}
+      {/* <PayRoll /> */}
+      {/* <PasswordRecoveryOne /> */}
+      {/* <PasswordRecoveryTwo /> */}
+      <ExpenditureForm />
+      {/* <IncomeForm/> */}
+      {/* <BottomNav /> */}
+
       </View>
     );
   }
