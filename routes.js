@@ -9,7 +9,7 @@ const connection = mysql.createPool ({
     database: 'farmmanager'
 });
 
-/**starting the server */
+/**creating the server */
 const server = express();
 
 /** creating a GET route */
@@ -17,7 +17,7 @@ server.get('/personnel', function (req, res) {
     //connecting to db
     connection.getConnection (function (err, connection) {
         //executing the mySQL query to select data from table
-        connection.query('SELECT *FROM personnel',  function (error, results, fields) {
+        connection.query('SELECT * FROM personnel',  function (error, results, fields) {
           //if some error occurs, throw an error.
           if(error)  throw error;
 
@@ -47,10 +47,10 @@ server.post('/personnel', (req, res) =>{
     const querystring = "INSERT INTO personnel(FirstName,LastName, DateOfBirth, PhoneNumber1, PhoneNumber1, NationalIdNo, JobTitle, JobStartDate, Qualifications) VALUES (?,?,?,?,?,?,?,?,?)";
 
 /** the connection method passes arguments of the variables*/
-    connection.query(querystring, [FirstName,LastName, DateOfBirth, PhoneNumber1, PhoneNumber1, NationalIdNo, JobTitle, JobStartDate, Qualifications])
-    console.log('getting the form input posted');
+    connection.query(querystring, [FirstName,LastName, DateOfBirth, PhoneNumber1, PhoneNumber1, NationalIdNo, JobTitle, JobStartDate, Qualifications]);
+    console.log('getting the form input');
 
-}
+})
 
 // starting our server.
 server.listen (3000, () => {
