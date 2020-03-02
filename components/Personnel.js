@@ -46,7 +46,7 @@ const JobTitle = t.refinement(t.String, JobTitle => {
 
 
 /** create the structure of the form. Image field is treated separately. */
-const User = t.struct({
+const Employee = t.struct({
   FirstName: FirstName, //string
   LastName: LastName, //string
   DateOfBirth: t.Date, //date picker
@@ -114,13 +114,58 @@ export default class Personnel extends Component {
       image: null
     };
   }
+
+ InsertRecordsToServer = () => {
+    fetch("localhost/personnel", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        FirstName: this.FirstName,
+        LastName: this.LastName,
+        //DateOfBirth: DateOfBirth1,
+        PhoneNumber1: PhoneNumber11,
+        PhoneNumber2: PhoneNumber21,
+        NationalIdNo: NationalIdNo1,
+        JobTitle: JobTitle1,
+        JobStartDate: JobStartDate1,
+        Qualifications: Qualifications1
+      })
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        alert("Thank You for Signing Up!");
+        this.props.navigation.navigate("ScreenTwo");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+
   handleSubmit = () => {
     const value = this._form.getValue();
     console.log("value: ", value);
+    
+     if (value != null) {
+        (this.FirstName = value.FirstName),
+        (this.LastName = value.LastName),
+        (this.DateOfBirth1 = value.DateOfBirth),
+        (this.PhoneNumber11 = value.PhoneNumber1),
+        (this.PhoneNumber21 = value.PhoneNumber2),
+        (this.NationalIdNo1 = value.NationalIdNo),
+        (this.JobTitle1 = value.JobTitle),
+        (this.JobStartDate1 = value.JobStartDate),
+        (this.Qualifications1 = value.Qualifications),
+        this.InsertRecordsToServer();
+    }
+
   };
   componentDidMount() {
     this.getPermissionAsync();
-    console.log("hi");
+    console.log("hi, component mounted");
   }
 
   getPermissionAsync = async () => {
@@ -154,7 +199,7 @@ export default class Personnel extends Component {
         <ScrollView>
           <View>
             <Text style={styles.title}>Personnel File</Text>
-            <Form ref={c => (this._form = c)} type={User} options={options} />
+            <Form ref={c => (this._form = c)} type={Employee} options={options} action={"/personnel"} />
             <Button
               title="Select Image."
               onPress={this._pickImage}

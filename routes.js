@@ -40,6 +40,9 @@ server.post('/personnel', (req, res) =>{
     const JobStartDate = req.body.JobStartDate;
     const Qualifications = req.body.Qualifications;
 
+    console.log(req.body);
+    
+
 /** create a query and insert into database*/
     const querystring = "INSERT INTO personnel(FirstName,LastName, DateOfBirth, PhoneNumber1, PhoneNumber1, NationalIdNo, JobTitle, JobStartDate, Qualifications) VALUES (?,?,?,?,?,?,?,?,?)";
 
