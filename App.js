@@ -1,4 +1,6 @@
 
+
+
 import React from 'react';
 import { View,Text } from 'react-native';
 import { Text, View, StyleSheet } from "react-native";
@@ -14,19 +16,16 @@ import PasswordRecoveryTwo from "./components/PasswordRecoveryTwo";
 import Advance from "./components/Advance";
 import ToolBinCard from './components/ToolBinCard';
 import Personnel from './components/Personnel';
-
-
-
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import ExpenditureForm from './components/ExpenditureForm';
 import Harvest from './components/Harvest';   
 
-const Stack = createStackNavigator();
 
 
-function App() {
+export default function App() {
+=======
+
+
   return (
-
     <View style={{ flex: 1 }}>
 
     
@@ -43,35 +42,17 @@ function App() {
       {/* <SignUp /> */}
       {/* <PayRoll /> */}
       {/* <PasswordRecoveryOne /> */}
+      {/* <PasswordRecoveryTwo /> */}
+      <ExpenditureForm />
+      {/* <IncomeForm/> */}
+      {/* <Sidebyside /> */}
+      {/* <BottomNav /> */}
+
       <PasswordRecoveryTwo />
+
 
 
     </View>
 
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{ gestureEnabled: false }}
-      >
-        <Stack.Screen
-          name="Advance"
-          component={Advance}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="login"
-          component={Login}
-          initialParams={{ user: "me" }}
-        />
-        <Stack.Screen
-          name="signup"
-          component={SignUp}
-          options={{ headerShown: true }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-
   );
 }
-
-export default App;
