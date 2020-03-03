@@ -47,7 +47,6 @@ const User = t.struct({
   ToolName: ToolName, //string
   Description: t.String, //string
 <<<<<<< HEAD
-<<<<<<< HEAD
   //DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   //DateTakenOut: t.Date, //date picker
@@ -55,8 +54,6 @@ const User = t.struct({
   ToolCondition: ToolCondition, //drop down select t.enums
   //DateOfPurchase: t.Date,
 =======
-=======
->>>>>>> tk-#004-BinCard-devTim
   DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   DateTakenOut: t.Date, //date picker

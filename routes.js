@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const cors = require("cors");
 
 const connection = mysql.createPool ({
     host: 'localhost',
@@ -9,27 +10,31 @@ const connection = mysql.createPool ({
     database: 'farmmanager'
 });
 
-/**creating the server */
-const server = express();
+
+/**creating the app and using the 3rd party modules */
+const app = express();
+app.use(bodyParser.json);
+app.use(cors());
 
 /** creating a GET route */
-server.get('/personnel', function (req, res) {
+app.get('/personnel', function (req, res) {
     //connecting to db
     connection.getConnection (function (err, connection) {
         //executing the mySQL query to select data from table
         connection.query('SELECT * FROM personnel',  function (error, results, fields) {
           //if some error occurs, throw an error.
           if(error)  throw error;
-
+            console.log(results);
+            console.log(fields);
           // getting the 'response' from the database and sending it to our route.
           //this is where the data is.
-          res.send(results)
+          res.send(results);
         });
     });
 });
 
 
-server.post('/personnel', (req, res) =>{
+app.post('/personnel', (req, res) =>{
     const FirstName = req.body.FirstName;
     const LastName = req.body.LastName;
     const DateOfBirth = req.body.DateOfBirth;
@@ -52,7 +57,7 @@ server.post('/personnel', (req, res) =>{
 
 })
 
-// starting our server.
-server.listen (3000, () => {
-    console.log ('server has started at port 3000!');
+// starting our app.
+app.listen (3000, () => {
+    console.log ('Server has started at port 3000!');
 });
