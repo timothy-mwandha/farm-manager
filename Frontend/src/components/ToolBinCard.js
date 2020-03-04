@@ -46,24 +46,18 @@ const StoreName = t.refinement(t.String, StoreName => {
 const User = t.struct({
   ToolName: ToolName, //string
   Description: t.String, //string
-<<<<<<< HEAD
   //DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   //DateTakenOut: t.Date, //date picker
   TakenBy: t.String, //string
   ToolCondition: ToolCondition, //drop down select t.enums
   //DateOfPurchase: t.Date,
-=======
   DateTakenIn: t.Date, //date picker
   StoreName: t.String, //string
   DateTakenOut: t.Date, //date picker
   TakenBy: t.String, //string
   ToolCondition: ToolCondition, //drop down select t.enums
   DateOfPurchase: t.Date,
-<<<<<<< HEAD
->>>>>>> tk-#004-BinCard-devTim
-=======
->>>>>>> tk-#004-BinCard-devTim
   SerialNumber: t.String //string
 });
 
@@ -111,16 +105,8 @@ const options = {
     TakenBy: {
       error: "Please enter persons name."
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
     DateOfPurchare: {
-=======
-    DateOfPurchase: {
->>>>>>> tk-#004-BinCard-devTim
-=======
-    DateOfPurchase: {
->>>>>>> tk-#004-BinCard-devTim
-      mode: "date"
+        mode: "date"
     },
     SerialNumber: {
       error: "Please use letters & numbers."
