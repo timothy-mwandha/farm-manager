@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -19,9 +20,12 @@ import Harvest from "./src/components/Harvest";
 import Consumable from "./src/components/Consumable";
 import RequisitionForm from "./src/components/RequisitionForm";
 
+
+// export default function App() {
 export default class App extends Component {
   render() {
     return (
+
       <View style={{ flex: 1 }}>
         <HomePage />
         {/* <Login /> */}
@@ -39,6 +43,7 @@ export default class App extends Component {
         {/* <Consumable /> */}
         {/* <RequisitionForm /> */}
       </View>
+
     );
   }
 }
