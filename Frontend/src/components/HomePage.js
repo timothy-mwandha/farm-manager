@@ -1,45 +1,70 @@
+import 'react-native-gesture-handler';
 import React from "react";
 import {
-  View,
-  StyleSheet,
+  View, StyleSheet,
   Text,
-  AppRegistry,
-  StatusBar,
-  TouchableHighlight,
   TouchableOpacity,
-  TouchableNativeFeedback,
-  Image
+  Button,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from '@react-navigation/stack';
+import LandReportFinance from "./LandReportFinance";
+import LandReportInventory from "./LandReportInventory";
 
-export default function HomePage() {
+const Stack = createStackNavigator();
+
+
+export default function HomePage( {navigation} ) {
+  const ref = React.useRef(null);
   return (
-    <View style={styles.container}>
-      {/* <StatusBar barStyle="yellow" hidden={false} backgroundColor="blue" translucent={true} /> */}
-      <View style={styles.nav}>
-        <TouchableOpacity style={styles.menu}>
-          <Text>MENU</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={styles.detail}>
-          <Text>DETAIL</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.finance}>
-        <View>
-          <Text>FINANCE</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.inventory}>
-        <View>
-          <Text>INVENTORY</Text>
-        </View>
-      </TouchableOpacity>
-
-      <View style={styles.update}>
-        <Text style={styles.text}>UPDATE</Text>
-      </View>
+<View style={{ flex: 1 }}>
+      <NavigationContainer ref={ref}>
+        <Stack.Navigator>
+          <Stack.Screen name="LandReportFinance" component={LandReportFinance} />
+          <Stack.Screen name="LandReportInventory" component={LandReportInventory} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Button
+        onPress={() => ref.current && ref.current.navigate('Login')}
+        title="Login"
+      />
     </View>
+
+    // <NavigationContainer ref={ref} style={styles.container}>
+    
+    //   {/* <StatusBar barStyle="yellow" hidden={false} backgroundColor="blue" translucent={true} /> */}
+    //   <View style={styles.nav}>
+    //     <TouchableOpacity style={styles.menu} >
+    //       <Text>MENU</Text>
+    //     </TouchableOpacity>
+
+    //     <TouchableOpacity style={styles.detail}>
+    //       <Text>DETAIL</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    //   <Button
+    //     onPress={() => ref.current && ref.current.navigate('LandReportFinance')}
+    //     title="Finance"
+    //   />
+    //   <TouchableOpacity style={styles.finance} onPress={() => ref.current && ref.current.navigate('LandReportFinance')}>
+    //     <View>
+    //       <Text>FINANCE</Text>
+    //     </View>
+    //   </TouchableOpacity>
+
+    //   <TouchableOpacity style={styles.inventory} onPress={() => ref.current && ref.current.navigate('LandReportInventory')}>
+    //     <View>
+    //       <Text>INVENTORY</Text>
+    //     </View>
+    //   </TouchableOpacity>
+
+    //   <View style={styles.update}>
+    //     <Text style={styles.text}>UPDATE</Text>
+    //   </View>
+    
+    // </NavigationContainer>
   );
 }
 const styles = StyleSheet.create({
