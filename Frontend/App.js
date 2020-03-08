@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -26,18 +26,18 @@ export default class App extends Component {
         {/*<HomePage /> */}
         <Login />
         {/* <SignUp /> */}
-        {/* <PayRoll /> */}
+        {/*<PayRoll /> */}
         {/* <PasswordRecoveryOne /> */}
         {/* <PasswordRecoveryTwo /> */}
-        {/* <Advance/> */}
+        {/* <Advance /> */}
         {/* <Personnel /> */}
-        {/* <ToolBinCard /> */}
+        <ToolBinCard />
         {/* <ExpenditureForm /> */}
-        {/* <IncomeForm/> */}
+        {/* <IncomeForm /> */}
         {/* <BottomNav /> */}
         {/* <Harvest /> */}
-        {/* <Consumable/> */}
-        {/* <RequisitionForm/> */}
+        {/* <Consumable /> */}
+        {/* <RequisitionForm /> */}
       </View>
     );
   }
