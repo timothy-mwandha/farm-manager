@@ -59,7 +59,7 @@ const formStyles = {
   },
   controlLabel: {
     normal: {
-      color: "#650205",
+      color: "#39A693",
       fontSize: 20,
       marginBottom: 5
     },
@@ -143,19 +143,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginTop: 5,
-    color: "#650205",
+    color: "#39A693",
     textAlign: "center",
     marginBottom: 25
   },
   question: {
-    color: "#650205",
+    color: "#39A693",
     textAlign: "center",
     marginTop: 18,
     fontSize: 18
   },
   link: {
     fontWeight: "bold",
-    color: "#650205",
+    color: "#39A693",
     textAlign: "center",
     marginTop: 8,
     fontSize: 20,

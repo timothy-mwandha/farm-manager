@@ -30,8 +30,8 @@ export default class App extends Component {
         {/* <PasswordRecoveryOne /> */}
         {/* <PasswordRecoveryTwo /> */}
         {/* <Advance /> */}
-        <Personnel />
-        {/* <ToolBinCard /> */}
+        {/* <Personnel /> */}
+        <ToolBinCard />
         {/* <ExpenditureForm /> */}
         {/* <IncomeForm /> */}
         {/* <BottomNav /> */}
