@@ -36,12 +36,12 @@ const formStyles = {
   },
   controlLabel: {
     normal: {
-      color: "#650205",
+      color: "#39A693",
       fontSize: 20,
       marginBottom: 5
     },
     error: {
-      color: "red",
+      color: "green",
       fontSize: 18,
       marginBottom: 7,
       fontWeight: "600"
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginTop: 5,
-    color: "#650205",
+    color: "#39A693",
     textAlign: "center",
     marginBottom: 25
   },

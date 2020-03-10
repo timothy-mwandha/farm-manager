@@ -22,13 +22,13 @@ function MyTabs() {
       initialRouteName="IncomeForm"
       activeColor="#fff"
       labelStyle={{ fontSize: 60 }}
-      backgroundColor="#650205"
-      style={{ backgroundColor: "#650205", fontSize: 40 }}
+      backgroundColor="#39A693"
+      style={{ backgroundColor: "#39A693", fontSize: 40 }}
     >
       <Tab.Screen
         name="IncomeForm"
         component={IncomeForm}
-        backgroundColor="#650205"
+        backgroundColor="#39A693"
         options={{
           tabBarLabel: "Income",
           tabBarIcon: ({ color, size }) => (
