@@ -35,7 +35,7 @@ const formStyles = {
       marginBottom: 5
     },
     error: {
-      color: "red",
+      color: "green",
       fontSize: 18,
       marginBottom: 7,
       fontWeight: "600"
