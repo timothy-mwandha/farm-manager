@@ -24,13 +24,13 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1 }}>
         {/*<HomePage /> */}
-        <Login />
+        {/* <Login /> */}
         {/* <SignUp /> */}
-        {/*<PayRoll /> */}
+        {/* <PayRoll /> */}
         {/* <PasswordRecoveryOne /> */}
         {/* <PasswordRecoveryTwo /> */}
         {/* <Advance /> */}
-        {/* <Personnel /> */}
+        <Personnel />
         {/* <ToolBinCard /> */}
         {/* <ExpenditureForm /> */}
         {/* <IncomeForm /> */}
