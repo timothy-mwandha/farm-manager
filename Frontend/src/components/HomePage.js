@@ -15,26 +15,17 @@ import LandReportInventory from "./LandReportInventory";
 const Stack = createStackNavigator();
 
 
-export default function HomePage() {
+export default function HomePage({navigation}) {
   return (
     <View style={styles.container}>
-      {/* <StatusBar barStyle="yellow" hidden={false} backgroundColor="blue" translucent={true} /> */}
-      <View style={styles.nav}>
-        <TouchableOpacity style={styles.menu}>
-          <Text>MENU</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.detail}>
-          <Text>DETAIL</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.finance}>
+        
+      <TouchableOpacity onPress={() => navigation.navigate('Finance')} style={styles.finance}>
         <View>
           <Text>FINANCE</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.inventory}>
+      <TouchableOpacity onPress={() => navigation.navigate('Inventory')} style={styles.inventory}>
         <View>
           <Text>INVENTORY</Text>
         </View>
