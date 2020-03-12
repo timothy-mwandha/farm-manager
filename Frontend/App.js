@@ -1,3 +1,44 @@
+
+
+// // import * as React from 'react';
+// // import { Button, View } from 'react-native';
+// // import { createDrawerNavigator } from '@react-navigation/drawer';
+// // import { NavigationContainer } from '@react-navigation/native';
+
+// // function HomeScreen({ navigation }) {
+// //   return (
+// //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+// //       <Button
+// //         onPress={() => navigation.navigate('Notifications')}
+// //         title="Go to notifications"
+// //       />
+// //     </View>
+// //   );
+// // }
+
+// // function NotificationsScreen({ navigation }) {
+// //   return (
+// //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+// //       <Button onPress={() => navigation.goBack()} title="Go back home" />
+// //     </View>
+// //   );
+// // }
+
+// // const Drawer = createDrawerNavigator();
+
+// // export default function App() {
+// //   return (
+// //     <NavigationContainer>
+// //       <Drawer.Navigator initialRouteName="Home">
+// //         <Drawer.Screen name="Home" component={HomeScreen} />
+// //         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+// //       </Drawer.Navigator>
+// //     </NavigationContainer>
+// //   );
+// // }
+
+
+
 import 'react-native-gesture-handler';
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
@@ -18,7 +59,6 @@ import ToolBinCard from "./src/components/ToolBinCard";
 import Personnel from "./src/components/Personnel";
 import ExpenditureForm from "./src/components/ExpenditureForm";
 import IncomeForm from "./src/components/IncomeForm";
-// import InventoryForm from "./src/components/InventoryForm";
 import BottomNav from "./src/components/BottomNav";
 import Harvest from "./src/components/Harvest";
 import Consumable from "./src/components/Consumable";
@@ -30,46 +70,18 @@ import LandReportInventory from "./src/components/LandReportInventory";
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// function HomeScreen( {navigation} ) {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Home Screen</Text>
-//             <Button
-//         title="Go to Details"
-//         onPress={() => navigation.navigate('Details')}
-//       />
-//     </View>
-//   );
-// }
-
-// function DetailsScreen( {navigation} ) {
-//   return (
-//        <Stack.Navigator initialRouteName="Home">
-//          <Stack.Screen name="jjaja wo" component={HomePage} />
-//          <Stack.Screen name="Finance" component={LandReportFinace} />
-//          <Stack.Screen name="Inventory" component={LandReportInventory} />
-//        </Stack.Navigator>
-//   );
-// }
-
-
-
-function App() {
-  return (
+export default class App extends Component {
+  render() {
+    return (
       <NavigationContainer>
-       <Stack.Navigator initialRouteName="Home">
-         <Stack.Screen name="jjaja wo" component={HomePage} />
-         <Stack.Screen name="Finance" component={LandReportFinace} />
-         <Stack.Screen name="Inventory" component={LandReportInventory} />
-         <Stack.Screen name="incomeForm" component={IncomeForm} />
-         {/* <Stack.Screen name="InventoryForm" component={InventoryForm} /> */}
-       </Stack.Navigator>
+        <Stack.Navigator>
+          <Stack.Screen name="jjaja wo" component={HomePage} />
+          <Stack.Screen name="Finance" component={LandReportFinace} />
+          <Stack.Screen name="incomeForm" component={IncomeForm} />
+          <Stack.Screen name="expenditureForm" component={IncomeForm} />
+        </Stack.Navigator>
       </NavigationContainer>
-      
-    
-  );
+    );
+  }
 }
-<View>
-    <BottomNav />
-</View>
-export default App;
+   
