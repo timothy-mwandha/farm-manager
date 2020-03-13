@@ -1,14 +1,19 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
 
-export class AdvanceLand extends Component {
-    render() {
-        return (
+const Stack = createStackNavigator();
+
+export default function AdvanceLand({navigation}) {
+  return (
             <View>
                 <Text> Advance Landing Page </Text>
+                <Button 
+                title="ADD"
+                style={{position: 'absolute', bottom:0, left:0,}}
+                onPress={() => navigation.navigate('advance')}
+                />
             </View>
         )
     }
-}
-
-export default AdvanceLand

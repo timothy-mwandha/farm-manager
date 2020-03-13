@@ -1,44 +1,3 @@
-
-
-// // import * as React from 'react';
-// // import { Button, View } from 'react-native';
-// // import { createDrawerNavigator } from '@react-navigation/drawer';
-// // import { NavigationContainer } from '@react-navigation/native';
-
-// // function HomeScreen({ navigation }) {
-// //   return (
-// //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-// //       <Button
-// //         onPress={() => navigation.navigate('Notifications')}
-// //         title="Go to notifications"
-// //       />
-// //     </View>
-// //   );
-// // }
-
-// // function NotificationsScreen({ navigation }) {
-// //   return (
-// //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-// //       <Button onPress={() => navigation.goBack()} title="Go back home" />
-// //     </View>
-// //   );
-// // }
-
-// // const Drawer = createDrawerNavigator();
-
-// // export default function App() {
-// //   return (
-// //     <NavigationContainer>
-// //       <Drawer.Navigator initialRouteName="Home">
-// //         <Drawer.Screen name="Home" component={HomeScreen} />
-// //         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-// //       </Drawer.Navigator>
-// //     </NavigationContainer>
-// //   );
-// // }
-
-
-
 import 'react-native-gesture-handler';
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
@@ -65,6 +24,13 @@ import Consumable from "./src/components/Consumable";
 import RequisitionForm from "./src/components/RequisitionForm";
 import LandReportFinace from "./src/components/LandReportFinance";
 import LandReportInventory from "./src/components/LandReportInventory";
+import IncomeLand from './src/components/IncomeLand';
+import ExpenditureLand from './src/components/ExpenditureLand';
+import PayrollLand from './src/components/PayrollLand';
+import RequisitionLand from './src/components/RequisitionLand';
+import AdvanceLand from './src/components/AdvanceLand';
+
+
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -78,7 +44,18 @@ export default class App extends Component {
           <Stack.Screen name="jjaja wo" component={HomePage} />
           <Stack.Screen name="Finance" component={LandReportFinace} />
           <Stack.Screen name="incomeForm" component={IncomeForm} />
-          <Stack.Screen name="expenditureForm" component={IncomeForm} />
+          <Stack.Screen name="expenditureForm" component={ExpenditureForm} />
+          <Stack.Screen name="incomeLand" component={IncomeLand} />
+          <Stack.Screen name="expenditureland" component={ExpenditureLand} />
+          <Stack.Screen name="payrollLand" component={PayrollLand} />
+          <Stack.Screen name="requisitionland" component={RequisitionLand} />
+          <Stack.Screen name="advanceland" component={AdvanceLand} />
+          <Stack.Screen name="payroll" component={PayRoll} />
+          <Stack.Screen name="requisitionForm" component={RequisitionForm} />
+          <Stack.Screen name="advance" component={Advance} />
+          <Stack.Screen name="advanceLand" component={AdvanceLand} />
+
+
         </Stack.Navigator>
       </NavigationContainer>
     );

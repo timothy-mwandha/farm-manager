@@ -18,7 +18,6 @@ const Stack = createStackNavigator();
 export default function HomePage({navigation}) {
   return (
     <View style={styles.container}>
-        
       <TouchableOpacity onPress={() => navigation.navigate('Finance')} style={styles.finance}>
         <View>
           <Text>FINANCE</Text>
