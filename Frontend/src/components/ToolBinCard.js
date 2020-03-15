@@ -116,18 +116,11 @@ const options = {
       label: "Taken By",
       error: "Please enter persons name."
     },
-<<<<<<< HEAD:components/ToolBinCard.js
-<<<<<<< HEAD
-<<<<<<< HEAD
-    DateOfPurchare: {
-=======
+
     DateOfPurchase: {
->>>>>>> tk-#004-BinCard-devTim
-=======
-    DateOfPurchase: {
->>>>>>> tk-#004-BinCard-devTim
       mode: "date"
-=======
+    },
+
     ToolCondition: {
       label: "Tool Condition",
       error: "Please enter tool condition."
@@ -139,8 +132,8 @@ const options = {
         defaultValueText: "Select",
         format: date => moment(date).format("DD-MM-YYYY")
       }
->>>>>>> eb0495d2438fcddfdd8f54036844ebd6a21f909f:Frontend/src/components/ToolBinCard.js
     },
+    
     SerialNumber: {
       label: "Serial Number",
       error: "Please use letters & numbers."
@@ -170,15 +163,9 @@ export default class ToolBinCard extends Component {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
-<<<<<<< HEAD
-<<<<<<< HEAD
         alert("Sorry, we need camera roll permissions to make this work!");
-=======
         alert("Sorry, get camera permissions first!");
->>>>>>> tk-#004-BinCard-devTim
-=======
-        alert("Sorry, get camera permissions first!");
->>>>>>> tk-#004-BinCard-devTim
+
       }
     }
   };
